@@ -1,8 +1,6 @@
 package com.example.projeto.feature.auth.login
 
-import android.content.res.Resources.Theme
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Email
 import androidx.compose.material.icons.filled.Lock
 
 import androidx.compose.foundation.clickable
@@ -12,16 +10,17 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavHostController
+import androidx.navigation.compose.rememberNavController
 import com.example.projeto.ui.theme.LinkText
 import com.example.projeto.ui.theme.PrimaryButton
 import com.example.projeto.ui.theme.ProjetoTheme
 
 @Composable
-fun LoginScreen() {
+fun LoginScreen(navController: NavHostController) {
     Scaffold { padding ->
         Column(
             modifier = Modifier
@@ -80,13 +79,16 @@ fun LoginScreen() {
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 Text("Ainda não tem uma conta? ")
-                Text(
-                    "Cadastre-se",
-                    color = LinkText,
-                    modifier = Modifier.clickable(enabled = true) {
-
+                Button(
+                    // A ação a ser executada quando o botão for clicado.
+                    onClick = {
+                        // Usa o NavController para voltar para a tela anterior na pilha de navegação.
+                        navController.navigate("registerUserScreen")
                     }
-                )
+                ) {
+                    // O texto que aparece dentro do botão.
+                    Text("Cadastre-se")
+                }
             }
         }
     }
@@ -95,5 +97,6 @@ fun LoginScreen() {
 @Preview(showBackground = true)
 @Composable
 private fun LoginScreenPreview() {
-    ProjetoTheme { LoginScreen() }
+    val navController = rememberNavController()
+    ProjetoTheme { LoginScreen(navController) }
 }

@@ -13,12 +13,14 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavHostController
+import androidx.navigation.compose.rememberNavController
 import com.example.projeto.ui.theme.LinkText
 import com.example.projeto.ui.theme.PrimaryButton
 import com.example.projeto.ui.theme.ProjetoTheme
 
 @Composable
-fun RegisterUserScreen() {
+fun RegisterUserScreen(navController: NavHostController) {
     Scaffold { padding ->
         Column(
             modifier = Modifier
@@ -108,12 +110,18 @@ fun RegisterUserScreen() {
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 Text("Já tem uma conta? ")
-                Text(
-                    "Logar",
-                    color = LinkText,
-                    modifier = Modifier.clickable(enabled = false) {} // só visual
-                )
+                Button(
+                    // A ação a ser executada quando o botão for clicado.
+                    onClick = {
+                        // Usa o NavController para voltar para a tela anterior na pilha de navegação.
+                        navController.navigate("login")
+                    }
+                ) {
+                    // O texto que aparece dentro do botão.
+                    Text("Logar")
+                }
             }
+
         }
     }
 }
@@ -121,5 +129,6 @@ fun RegisterUserScreen() {
 @Preview(showBackground = true)
 @Composable
 private fun RegisterUserScreenPreview() {
-    ProjetoTheme { RegisterUserScreen() }
+    val navController = rememberNavController()
+    ProjetoTheme { RegisterUserScreen(navController) }
 }
