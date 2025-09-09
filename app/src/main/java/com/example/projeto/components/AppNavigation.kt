@@ -4,6 +4,8 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.projeto.feature.auth.login.LoginScreen
 import com.example.projeto.feature.auth.login.RegisterUserScreen
+import com.example.projeto.feature.home.HomeScreen
+import com.example.projeto.feature.UserDetails.UserDetailsScreen
 
 @Composable
 fun AppNavigation() {
@@ -20,9 +22,15 @@ fun AppNavigation() {
     ) {
         // Define uma rota de navegação chamada "tela1".
         composable("login") {
-            // O conteúdo dentro deste bloco é o que será exibido para a rota "tela1".
-            // Passamos o navController para a Tela1 para que ela possa iniciar ações de navegação.
             LoginScreen(navController)
+        }
+
+        composable("userDetails") {
+            UserDetailsScreen(navController)
+        }
+
+        composable("home") {
+            HomeScreen(navController)
         }
         // Define uma segunda rota de navegação chamada "tela2".
         composable("registerUserScreen") {

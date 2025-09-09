@@ -61,14 +61,14 @@ fun LoginScreen(navController: NavHostController) {
             }
 
             Button(
-                onClick = {},
+                onClick = {navController.navigate("home")},
                 modifier = Modifier
                     .fillMaxWidth()
                     .height(52.dp),
                 shape = RoundedCornerShape(16.dp),
                 colors = ButtonDefaults.buttonColors(containerColor = PrimaryButton)
             ) {
-                Text("Logar")
+                Text("Login")
             }
 
             Spacer(Modifier.weight(1f))
